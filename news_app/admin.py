@@ -1,0 +1,16 @@
+from django.contrib import admin
+from .models import News, Category, Contact
+
+# Register your models here.
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug', 'publish_time', 'status']
+    list_filter= ['created_time', 'publish_time', 'status']
+    prepopulated_fields = {"slug": ('title',)}
+    date_hierarchy = 'publish_time'
+    search_fields = ['title', 'body']
+    ordering = ['status', 'publish_time']
+    
+admin.site.register(Category)
+
+admin.site.register(Contact)
